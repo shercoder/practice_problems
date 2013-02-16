@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1325127973 source:/home/psingh/Desktop/Practice/copyconstructor/main.cpp
+	<iostream>
+	"Thing.h"
+
+1325128259 /home/psingh/Desktop/Practice/copyconstructor/Thing.h
+	<iostream>
+

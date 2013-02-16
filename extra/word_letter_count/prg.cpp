@@ -1,0 +1,68 @@
+#include <iostream>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+void parse (string);
+
+int main()
+{
+	string str("");
+	getline(cin, str);
+	
+	parse(str);
+}
+
+void parse (string s)
+{
+	vector<char> storeChar;
+	storeChar.reserve(s.length()-1);
+	vector<char>::iterator it;
+	
+  int wordCounter = 0;
+  int l_count = 0;
+  bool found = false;
+	s.append("\n");
+	
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (isspace(s[i]))
+		{
+			wordCounter++;
+			continue;
+		}
+		
+		if (!storeChar.empty())
+		{
+			for (it = storeChar.begin(); it < storeChar.end(); it++)
+			{
+				if (*it == s[i])
+				{
+					found = true;
+					break;
+				}
+				else 
+					found = false;
+			}
+		}
+		 
+		if (!found)
+		{
+    	l_count = count(s.begin(), s.end(), s[i]);
+   		cout << l_count << " " << s[i] << endl;
+   		storeChar.push_back(s[i]);
+   		s.erase(i, 0);
+   	}
+	}
+
+  cout << wordCounter << " words" << endl;
+}
+
+
+
+
+
+
+
