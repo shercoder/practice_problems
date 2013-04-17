@@ -2,24 +2,17 @@
 #include <string>
 #include <map>
 #include <algorithm>
-#include <utility>
-#include <functional>
+#include <vector>
 
 using namespace std;
 
-template<typename A, typename B>
-pair<B,A> flip_pair(const pair<A,B> &p)
+map<string, int> terms;
+
+bool comp(const string& lhs, const string& rhs)
 {
-    return pair<B,A>(p.second, p.first);
+  return terms[lhs] > terms[rhs];
 }
 
-template<typename A, typename B>
-map<B,A> flip_map(const map<A,B> &src)
-{
-    map<B,A> dst;
-    std::transform(src.begin(), src.end(), inserter(dst, dst.begin()), flip_pair<A,B>);
-    return dst;
-}
 
 int main() {
   int N = 0;
@@ -27,29 +20,51 @@ int main() {
   cin.get();
 
   string term;
-  map<string, int> terms;
+  vector<string> just_strings;
+  
   for(int i = 0; i < N; ++i) {
     cin >> term;
-    terms[term]++;
-  }
-
-  map<string, int>::iterator itr = terms.begin();
-  for(; itr != terms.end(); ++itr) {
-    cout << itr->first << " => " << itr->second << endl;
-  }
-  cout << "=========================================" << endl;
-
-  int frequent = 0;
-  int f_counter = 0;
-  cin >> frequent;
-
-  map<int, string> values = flip_map(terms);
-  map<int, string>::reverse_iterator it = values.rbegin();
-  for(; it != values.rend(); ++it) {
-    if (f_counter < frequent) {
-      cout << it->second << endl;
-      ++f_counter;
+    if(!terms[term]++) {
+      just_strings.push_back(term);
     }
   }
+
+  stable_sort(just_strings.begin(), just_strings.end());
+  stable_sort(just_strings.begin(), just_strings.end(), comp);
+
+
+  int frequent = 0;
+  cin >> frequent;
+
+  //vector<string>::iterator it = just_strings.begin();
+
+  for(int i = 0; i < frequent; ++i) {
+    cout << just_strings[i] << endl;
+  }
+
+  
   return 0;
 }
+
+// template<typename A, typename B>
+// pair<B,A> flip_pair(const pair<A,B> &p)
+// {
+//     return pair<B,A>(p.second, p.first);
+// }
+
+// template<typename A, typename B>
+// map<B,A> flip_map(const map<A,B> &src)
+// {
+//     map<B,A> dst;
+//     std::transform(src.begin(), src.end(), inserter(dst, dst.begin()), flip_pair<A,B>);
+//     return dst;
+// }
+
+// map<int, string> values = flip_map(terms);
+// map<int, string>::reverse_iterator it = values.rbegin();
+// for(; it != values.rend(); ++it) {
+//   if (f_counter < frequent) {
+//     cout << it->second << endl;
+//     ++f_counter;
+//   }
+// }

@@ -9,6 +9,7 @@ int main() {
   cin >> N;
   cin.get();
   list<string> container;
+  list<string>::iterator cur_front;
 
   string token;
   string line;
@@ -18,8 +19,10 @@ int main() {
   while(cin >> token) {
     if(token.compare("A") == 0) {
       cin >> lines;
+      cin.get();
+
       for(int i = 0; i < lines; ++i) {
-        cin >> line;
+        getline(cin, line);
         if(size < N) {
           container.push_back(line);
           ++size;
@@ -30,6 +33,7 @@ int main() {
       }
     } else if(token.compare("R") == 0) {
       cin >> lines;
+      cin.get();
       for(int i = 0; i < lines; ++i) {
         if (container.size() > 0) {
           --size;

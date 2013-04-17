@@ -3,55 +3,37 @@
 #include <vector>
 using namespace std;
 
+typedef long long LL;
+vector<bool> primes;
 
-/*vector<bool> *p;
-int primes(int n )
-{
-	(*p)[0] = 0;
-	(*p)[1] = 0;
-	
-	int largest = 0;	
-	for (int i = 2; i <= n; ++i)
-	{
-		if((*p)[i])
-		{
-			for(int j = i*i; j <= n; j+=i)
-			{
-				(*p)[j] = 0;
-			}
-			largest = i;
-		}
-	}	
-	return largest;
-
-}
-
-int largestPrime(long int n)
-{
-	int s = (int)sqrt(n);
-	int largest = -1;
-	
-
-}*/
-
-long int FermatFactor(long int N) {
-	long int a = ceil(sqrt(N));
-	long int b2 = a*a-N;
-	long int sqrb2 = sqrt(b2);
-
-	while(sqrb2*sqrb2 != b2) {
-		a += 1;
-		b2 = a*a-N;
-		sqrb2 = sqrt(b2);
-	}
-	return a+sqrt(b2);
+void sieve(int n) {
+  primes[0] = 0;
+  primes[1] = 0;
+  int m = (int)sqrt(n);
+  for (int i = 2; i <= m; i++) {
+  	if (primes[i]) {
+  	  for (int k = i*i; k <= n; k+=i) {
+  	    primes[k] = 0;
+  	  }
+  	}
+  }
+    
 }
 
 int main()
 {
-	const long int num = 600851475143;
-	
-	cout << FermatFactor(13195) << endl;
-	
+	LL num = 600851475143;
+	primes = vector<bool>(1000000,1);
+
+  sieve(1000000);
+  int largest = 0;
+
+	for(int i = 1; i < primes.size(); i++) {
+		if(!(num%i) && primes[i]) {
+			num /= i;
+			largest = i;
+		}
+	}
+	cout << largest << endl;
 	return 0;
 }
