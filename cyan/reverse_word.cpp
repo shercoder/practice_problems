@@ -20,6 +20,8 @@ void reverse_func(char *str) {
     }
 }
 
+///////////////////////////////////////////////////////////////////
+
 // inplace O(n) in time and O(1) space
 void reverse_string(char *str, int len) {
   for (int i = 0; i < len/2; ++i) {
@@ -52,7 +54,7 @@ int main() {
     string reverse;
     while(pch != NULL) {
         int len = strlen(pch);
-        for(int i = len-1; i >= 0; --i) { 
+        for(int i = len-1; i >= 0; --i) {
             reverse += pch[i];
         }
         reverse += " ";
