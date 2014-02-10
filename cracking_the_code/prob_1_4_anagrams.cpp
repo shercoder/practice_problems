@@ -21,7 +21,7 @@ bool is_anagram(string first, string second) {
 }
 
 int main(int argc, char const* argv[]) {
-  if (argc != 3) { 
+  if (argc != 3) {
     cout << "Usage: " << argv[0] << " <first_string> <second_string>" << endl;
     return 1;
   }
